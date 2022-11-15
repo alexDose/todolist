@@ -15,7 +15,7 @@ import {TodolistsList} from '../features/TodolistsList'
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {useSelector} from 'react-redux'
 import {appActions} from '../features/Application'
-import {Route} from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import {authActions, authSelectors, Login} from '../features/Auth'
 import {selectIsInitialized, selectStatus} from '../features/Application/selectors'
 import {useActions} from '../utils/redux-utils'
@@ -65,7 +65,8 @@ function App({demo = false}: PropsType) {
                     {status === 'loading' && <LinearProgress/>}
                 </AppBar>
                 <Container fixed>
-                    <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
+                    <Route path={'/'} render={() => <Redirect to={'/todolist'}/>}/>
+                    <Route exact path={'/todolist'} render={() => <TodolistsList demo={demo}/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
                 </Container>
             </div>
